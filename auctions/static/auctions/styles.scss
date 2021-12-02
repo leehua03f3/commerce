@@ -1,0 +1,46 @@
+body {
+    padding: 10px;
+}
+
+form {
+	input.btn.btn-primary, input.btn.btn-secondary, input.btn.btn-warning {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+}
+
+div.container-fluid {
+	border: 1px solid #adadad;
+	border-radius: 5px;
+	float: left;
+	margin-bottom: 20px;
+	width: 100%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+img {
+	width: 300px;
+}
+
+a {
+	h4 {
+		font-size: 2em;
+	}
+}
+
+p.created_by {
+	font-size: 1em;
+	color: #8c8c8c;
+}
+
+img {
+	margin-right: 20px;
+	float: left;
+	border-radius: 5px;
+}
+
+.bidding {
+	float:left;
+	margin-right: 10px;
+}

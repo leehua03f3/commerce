@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+	<h2>"{{ username }}" watch list</h2>
+	{% for bid in bids %}
+		{% if bid.item.status == True %}
+			<div class="container-fluid">
+				<img src="{{ bid.item.image_url }}">
+				<a href="{% url 'listing' bid.item.id %}"> <h2>{{ bid.item.title }}</h2></a>
+				<p class="created_by">Created by {{ bid.item.user.username }}</p>
+				<h5><span style="font-weight: bold;">Price: </span>${{ bid.item.start_bid }}</h5>
+				<p>{{ bid.item.description }}</p>
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endblock %}

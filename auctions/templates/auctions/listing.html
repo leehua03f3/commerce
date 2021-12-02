@@ -1,0 +1,58 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+	<!-- Listing the item -->
+	<div class="container-fluid">
+		<img src="{{ item.image_url }}">
+		<div style="display: inline-block">
+			<h2>{{ item.title }}</h2>
+			<p class="created_by">Created by {{ item.user.username }}</p>
+			<p>{{ item.description }}</p>
+			<h5><span style="font-weight: bold;">Current bid: </span>${{ item.start_bid }}</h5>
+
+			<!-- Add to Watch list -->
+			<form action="{% url 'watchlist' item.id %}" method="post">
+				{% csrf_token %}
+				{% if bid.watchlist != True %}
+					<input class='btn btn-primary' type='submit' name='watchlist' value='Add to Watchlist'>
+				{% else %}
+					<input class='btn btn-secondary' type='submit' name='watchlist' value='Remove from Watchlist'>
+				{% endif %}
+			</form>
+		</div>
+	</div>
+
+	<!-- Bidding -->
+	<form action="{% url 'bidding' item.id %}" method="post">
+		{% csrf_token %}
+		<input type='number' required="required" name='bid' min="{{ item.start_bid }}" class='form-control' placeholder="Bid">
+		<input class="btn btn-primary bidding" value="Place Bid" type="submit">
+	</form>
+
+	<!-- Closing bid -->
+	{% if item.user == current_user %}
+		<form action="{% url 'close_bid' item.id %}" method="post">
+			{% csrf_token %}
+			<input class='btn btn-warning' type='submit' name='close_bid' value='Close Bid'>
+		</form>
+	{% endif %}
+
+	<!-- Submit comment -->
+	<form action="{% url 'comment' item.id %}" method="post">
+		{% csrf_token %}
+		<textarea class="form-control" name="comment" required="required" placeholder="Comment"></textarea>
+		<input class="btn btn-secondary" type="submit" value="Comment">
+	</form>
+
+	<!-- Display comments -->
+	<div class="container-fluid">
+		<h4>Comments:</h4>
+		{% for comment in comments %}
+			<div class="container-fluid">
+				<p>{{ comment.user.username }}</p>
+				<p>{{ comment.comment }}</p>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

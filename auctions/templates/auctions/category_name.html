@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+	<h2>{{ name }}</h2>
+	{% for item in listing %}
+		<div class="container-fluid">
+			<img src="{{ item.image_url }}">
+			<a href="{% url 'listing' item.id %}">
+				<h2>{{ item.title }}</h2>
+			</a>
+			<p class="created_by">Created by {{ item.user.username }}</p>
+			<h5><span style="font-weight: bold;">Price: </span>${{ item.start_bid }}</h5>
+			<p>{{ item.description }}</p>
+		</div>
+	{% endfor %}
+{% endblock %}
